@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>notes.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="it7006-object-oriented-design-notes">IT7006 Object-Oriented Design Notes</h1>
+<h4 id="week-1-introduction-to-object-oriented-design">Week 1: Introduction to Object-Oriented Design</h4>
+<p><strong>Object-Oriented Development Stages:</strong></p>
+<ol>
+<li><strong>Analysis:</strong> Develop a conceptual model to understand the problem.</li>
+<li><strong>Design:</strong> Build potential object-oriented models to meet requirements.</li>
+<li><strong>Programming:</strong> Implement the design using an object-oriented language (e.g., C#, Java, Python).</li>
+</ol>
+<p><strong>Programming Paradigms Comparison:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Paradigm</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Functional</strong></td>
+<td>Uses functions as mathematical expressions; outputs depend on inputs.</td>
+<td>Factorial function</td>
+</tr>
+<tr>
+<td><strong>Logical</strong></td>
+<td>Uses predicates and clauses with propositional calculus.</td>
+<td>Factorial predicate</td>
+</tr>
+<tr>
+<td><strong>Procedural</strong></td>
+<td>Encapsulates instructions into procedures to avoid repetition.</td>
+<td>Procedures in assembly-like languages</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Concepts in Object-Oriented Code:</strong></p>
+<ul>
+<li><strong>Type:</strong> Name in code.</li>
+<li><strong>Properties:</strong> Attributes in code.</li>
+<li><strong>Method:</strong> Behavior in code.</li>
+<li><strong>Interfaces:</strong> Describe inter-class workings.</li>
+<li><strong>Message Passing</strong>: Classes may need to interact with other classes to obtain information or perform actions.</li>
+<li><strong>Method Invocation</strong>: A method is invoked by sending a message to it.</li>
+<li><strong>Inter-Class Communication</strong>: A class can send a message to another class to request information or an action.</li>
+<li><strong>Signature</strong>: Defines the structure and content of a message for a valid method call.</li>
+</ul>
+<hr>
+<h3 id="dynamic-binding">Dynamic Binding</h3>
+<ul>
+<li><strong>Concept</strong>: Attaching a message to a method at runtime.</li>
+<li><strong>Example</strong>:<pre class="hljs"><code><div>Employee employee = <span class="hljs-keyword">new</span> PartTime();
+employee.getSalary();
+</div></code></pre>
+Here, <code>employee</code> is an instance of <code>PartTime</code>, demonstrating a matching method.</li>
+<li><strong>Mechanism</strong>: Also known as late binding, where method binding is deferred until runtime (opposed to early/static binding).</li>
+<li><strong>Dependency Notation</strong>: Represented as a dashed line.</li>
+</ul>
+<hr>
+<h3 id="relationship-hierarchy">Relationship Hierarchy</h3>
+<ul>
+<li><strong>Tree Hierarchies</strong>: Aggregations are often visualized as trees.</li>
+<li><strong>Graph Connections</strong>: Associations between objects often form graphs.</li>
+</ul>
+<hr>
+<h3 id="interfaces-and-abstract-classes">Interfaces and Abstract Classes</h3>
+<ul>
+<li><strong>Interfaces</strong>:
+<ul>
+<li>Contains only method declarations, no implementations.</li>
+<li>Cannot hold member data.</li>
+<li>May declare events, methods, and properties.</li>
+<li>Methods must be implemented by classes that adopt the interface.</li>
+<li>A class can implement multiple interfaces but extend only one class.</li>
+<li>Interfaces, like abstract classes, cannot be instantiated.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="week-2-object-oriented-oo-concepts-and-relationships">Week 2: Object-Oriented (OO) Concepts and Relationships</h4>
+<p><strong>OO Design Process Steps:</strong></p>
+<ol>
+<li>Analysis and Statement of Work.</li>
+<li>Requirement gathering and prototyping.</li>
+<li>Class identification and assigning responsibilities.</li>
+<li>Modeling system interactions.</li>
+</ol>
+<p><strong>Class Structure in C#:</strong></p>
+<ul>
+<li><strong>Data Members:</strong> Constants, fields.</li>
+<li><strong>Function Members:</strong> Methods, properties, constructors, etc.</li>
+</ul>
+<p><strong>Messages &amp; Signature:</strong></p>
+<ul>
+<li>Methods in classes interact through message sending.</li>
+<li><strong>Signature:</strong> Defines structure and content of a message.</li>
+</ul>
+<hr>
+<p><strong>Types of Relationships:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Relationship</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Association</strong></td>
+<td>Weak connection; objects maintain individual lifecycles.</td>
+<td>Group of unrelated objects</td>
+</tr>
+<tr>
+<td><strong>Aggregation</strong></td>
+<td>Specialized association; objects have independent lifecycles but a parent-child ownership.</td>
+<td>Department with employees</td>
+</tr>
+<tr>
+<td><strong>Composition</strong></td>
+<td>Strong form of aggregation; child objects' lifecycle depends on the parent.</td>
+<td>House and rooms</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples-in-c">Examples in C#:</h3>
+<p>Association:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Student</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span> =&gt; Name = name;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Teacher</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Teach</span>(<span class="hljs-params">Student student</span>)</span> =&gt;
+        Console.WriteLine(<span class="hljs-string">$"<span class="hljs-subst">{Name}</span> teaches <span class="hljs-subst">{student.Name}</span>"</span>);
+}
+
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">var</span> student = <span class="hljs-keyword">new</span> Student(<span class="hljs-string">"Alice"</span>);
+<span class="hljs-keyword">var</span> teacher = <span class="hljs-keyword">new</span> Teacher { Name = <span class="hljs-string">"Mr. Smith"</span> };
+teacher.Teach(student);
+</div></code></pre>
+<p>Aggregation:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Book</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Title { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Book</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> title</span>)</span> =&gt; Title = title;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Library</span>
+{
+    <span class="hljs-keyword">public</span> List&lt;Book&gt; Books { <span class="hljs-keyword">get</span>; } = <span class="hljs-keyword">new</span> List&lt;Book&gt;();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddBook</span>(<span class="hljs-params">Book book</span>)</span> =&gt; Books.Add(book);
+}
+
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">var</span> library = <span class="hljs-keyword">new</span> Library();
+library.AddBook(<span class="hljs-keyword">new</span> Book(<span class="hljs-string">"C# Programming"</span>));
+</div></code></pre>
+<p>Composition:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Room</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Room</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)</span> { Name = name; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">House</span>
+{
+    <span class="hljs-keyword">private</span> List&lt;Room&gt; Rooms = <span class="hljs-keyword">new</span> List&lt;Room&gt;();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddRoom</span>(<span class="hljs-params">Room room</span>)</span> =&gt; Rooms.Add(room);
+}
+</div></code></pre>
+<hr>
+<h4 id="week-3-key-oo-principles">Week 3: Key OO Principles</h4>
+<p><strong>Abstraction:</strong> focuses on showing only essential features of an object and hiding unnecessary details. For example, modeling a <code>BankAccount</code> class instead of a specific account. Abstraction allows a general view of how an object should behave without including the exact specifics.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Shape</span> {
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">double</span> <span class="hljs-title">Area</span>(<span class="hljs-params"></span>)</span>;
+}
+<span class="hljs-comment">// OR</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">BankAccount</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">decimal</span> balance;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">decimal</span> Balance { <span class="hljs-keyword">get</span> =&gt; balance; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span> =&gt; balance = <span class="hljs-keyword">value</span>; }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Deposit</span>(<span class="hljs-params"><span class="hljs-keyword">decimal</span> amount</span>)</span> =&gt; balance += amount;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Withdraw</span>(<span class="hljs-params"><span class="hljs-keyword">decimal</span> amount</span>)</span> =&gt; balance -= amount;
+}
+</div></code></pre>
+<p><strong>Encapsulation:</strong> wraps attributes and methods into objects, hiding internal details and only exposing what’s necessary. This prevents external entities from changing an object’s internal state directly, fostering information hiding and improving modularity.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+</div></code></pre>
+<p><strong>Inheritance:</strong> allows the creation of new classes that reuse, extend, or modify behaviors of existing classes. For instance, a <code>Convertible</code> class can inherit characteristics from a more general <code>Car</code> class, thus establishing a natural hierarchy and promoting code reuse.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">class</span> <span class="hljs-title">Employee</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+<span class="hljs-keyword">class</span> <span class="hljs-title">Manager</span> : <span class="hljs-title">Employee</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> Salary { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+</div></code></pre>
+<p><strong>Polymorphism:</strong> enables objects to respond differently to the same method call, depending on their specific types. For example, a <code>calculateInterest</code> method may calculate interest differently for <code>SavingsAccount</code> and <code>ChequeAccount</code> classes.</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Example: Account base class with polymorphic CalculateInterest</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Account</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">decimal</span> <span class="hljs-title">CalculateInterest</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SavingsAccount</span> : <span class="hljs-title">Account</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">decimal</span> <span class="hljs-title">CalculateInterest</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-number">0.03</span>m; <span class="hljs-comment">// 3% interest</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CheckingAccount</span> : <span class="hljs-title">Account</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">decimal</span> <span class="hljs-title">CalculateInterest</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-number">0.01</span>m; <span class="hljs-comment">// 1% interest</span>
+}
+</div></code></pre>
+<table>
+<thead>
+<tr>
+<th>Type of Polymorphism</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Static (Compile-time)</strong></td>
+<td>Uses method overloading; the method called is determined at compile-time.</td>
+<td>Overloaded methods for calculations</td>
+</tr>
+<tr>
+<td><strong>Dynamic (Runtime)</strong></td>
+<td>Uses method overriding; the specific method called is decided at runtime.</td>
+<td>Employee salary calculation override</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples-in-c">Examples in C#:</h3>
+<p>Static Polymorphism:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Printer</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> text</span>)</span> =&gt; Console.WriteLine(text);
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Print</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> number</span>)</span> =&gt; Console.WriteLine(number);
+}
+</div></code></pre>
+<p>Dynamic Polymorphism:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Base</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Display</span>(<span class="hljs-params"></span>)</span> =&gt; Console.WriteLine(<span class="hljs-string">"Base Display"</span>);
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Derived</span> : <span class="hljs-title">Base</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Display</span>(<span class="hljs-params"></span>)</span> =&gt; Console.WriteLine(<span class="hljs-string">"Derived Display"</span>);
+}
+</div></code></pre>
+<hr>
+<p><strong>Guidelines for Inheritance:</strong></p>
+<ul>
+<li>Avoid overusing inheritance; use it only when subclasses genuinely extend the superclass.</li>
+<li>Ensure the subclass is a type of superclass (&quot;is-a&quot; relationship).</li>
+<li>Subclasses should only add new features, not remove or reinterpret superclass functionality.</li>
+</ul>
+<hr>
+<h4 id="week-5-modeling-design-diagram"><strong>Week 5: Modeling Design Diagram</strong></h4>
+<h5 id="uml-diagrams-in-object-oriented-design"><strong>UML Diagrams in Object-Oriented Design</strong></h5>
+<p>Unified Modeling Language (UML) offers multiple diagrams that visually represent different aspects of a system. Each diagram type has a unique role, as summarized below:</p>
+<table>
+<thead>
+<tr>
+<th>UML Diagram</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Use Case Diagram</strong></td>
+<td>Illustrates how the system interacts with external entities (users or other systems).</td>
+</tr>
+<tr>
+<td><strong>Class Diagram</strong></td>
+<td>Defines system classes and their relationships, showing data structure.</td>
+</tr>
+<tr>
+<td><strong>Collaboration Diagram</strong></td>
+<td>Details interactions between objects to perform a task.</td>
+</tr>
+<tr>
+<td><strong>Sequence Diagram</strong></td>
+<td>Shows the order of messages between objects in a particular process.</td>
+</tr>
+<tr>
+<td><strong>State Diagram</strong></td>
+<td>Tracks the states an object goes through in its lifecycle.</td>
+</tr>
+<tr>
+<td><strong>Package Diagram</strong></td>
+<td>Organizes classes into packages or modules.</td>
+</tr>
+<tr>
+<td><strong>Component Diagram</strong></td>
+<td>Shows the dependencies and relationships among software components.</td>
+</tr>
+<tr>
+<td><strong>Deployment Diagram</strong></td>
+<td>Describes the physical deployment of software artifacts.</td>
+</tr>
+</tbody>
+</table>
+<h5 id="sequence-diagram-steps"><strong>Sequence Diagram Steps</strong></h5>
+<p>Creating a Sequence Diagram involves the following steps:</p>
+<ol>
+<li>Identify the primary actors and objects involved.</li>
+<li>Define the sequence of messages exchanged to perform a function.</li>
+<li>Outline return values and any branching actions.</li>
+</ol>
+<p><img src="./POWERPNT_rAW1PgbQAI.png" alt="sequence diagram"></p>
+<hr>
+<h5 id="activity-diagram-elements"><strong>Activity Diagram Elements</strong></h5>
+<p>Activity Diagrams model the flow of control or data in a process. Here are key elements:</p>
+<ul>
+<li><strong>Actions</strong> (Rounded rectangles): Represent tasks or steps.</li>
+<li><strong>Decisions</strong> (Diamonds): Show branching points.</li>
+<li><strong>Bars</strong>: Split or join concurrent activities.</li>
+<li><strong>Start/End</strong> (Circles): Indicate the beginning and end of a process.</li>
+</ul>
+<p><img src="image-1.png" alt="alt text"></p>
+<h2 id="design-patterns-overview">Design Patterns Overview</h2>
+<ul>
+<li>
+<p><strong>Definition</strong>: Design patterns are standardized solutions to common design problems encountered during software development. They serve as templates for how to solve recurring design challenges, enhancing communication among developers, supporting code reuse, and empowering beginners to understand established practices.</p>
+</li>
+<li>
+<p><strong>Representation</strong>: Usually illustrated with class or sequence diagrams.</p>
+</li>
+<li>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li>Enhances communication among developers.</li>
+<li>Supports reuse and empowers beginners.</li>
+</ul>
+</li>
+<li>
+<p><strong>Caution</strong>: Design patterns are not meant as shortcuts. Effective use requires genuine problem-solving skills.</p>
+</li>
+<li>
+<p><strong>Categories of GOF (Gang of Four) Design Patterns</strong>:</p>
+<ol>
+<li><strong>Creational Patterns</strong>: Focus on the processes of object creation, which can affect system flexibility and performance. These patterns abstract the instantiation process, making it easier to create and manage complex objects.</li>
+<li><strong>Structural Patterns</strong>: Concerned with how objects and classes are composed to form larger structures. They help ensure that if one part of a system changes, the entire system does not need to change, promoting scalability.</li>
+<li><strong>Behavioral Patterns</strong>: Deal with communication between objects. These patterns help to define how objects interact and communicate, anticipating potential future changes to minimize side effects.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="creational-design-patterns">Creational Design Patterns</h2>
+<h3 id="1-singleton-pattern">1. Singleton Pattern</h3>
+<ul>
+<li>
+<p><strong>Purpose</strong>: The Singleton Pattern is designed to ensure that a class has only one instance and provides a global point of access to that instance. This is crucial in scenarios where a single resource is shared, such as logging, configuration management, or service proxies.</p>
+</li>
+<li>
+<p><strong>Examples of Use Cases</strong>:</p>
+<ul>
+<li><strong>Logging</strong>: A logging class that manages logging across an application. If multiple instances were created, it could lead to inconsistent logging.</li>
+<li><strong>Database Connections</strong>: A single connection to a database might be necessary to avoid overwhelming the server with multiple connections.</li>
+<li><strong>Configuration Settings</strong>: A singleton can encapsulate configuration settings that need to be accessed throughout the application, ensuring all parts of the app use the same configuration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Advantages</strong>:</p>
+<ul>
+<li>Controlled access to a single instance through a well-defined interface.</li>
+<li>No need to use static classes, allowing for easier testing and dependency injection.</li>
+</ul>
+</li>
+<li>
+<p><strong>Disadvantages</strong>:</p>
+<ul>
+<li>Can complicate unit testing because it introduces global state.</li>
+<li>May limit parallelism if multiple threads attempt to access the instance simultaneously.</li>
+</ul>
+</li>
+</ul>
+<p><strong>C# Example</strong>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Singleton</span>
+{
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">readonly</span> Singleton instance = <span class="hljs-keyword">new</span> Singleton();
+
+    <span class="hljs-comment">// Private constructor ensures that an object is not instantiated from outside</span>
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Singleton</span>(<span class="hljs-params"></span>)</span> 
+    { 
+        <span class="hljs-comment">// Initialize any required resources here</span>
+    }
+    
+    <span class="hljs-comment">// Public method to provide access to the instance</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton Instance
+    {
+        <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> instance; }
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">SomeOperation</span>(<span class="hljs-params"></span>)</span>
+    {
+        <span class="hljs-comment">// Example method that uses the singleton instance</span>
+        Console.WriteLine(<span class="hljs-string">"Executing operation on singleton instance."</span>);
+    }
+}
+</div></code></pre>
+<p><em>Usage</em>:</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// Accessing the singleton instance and invoking a method</span>
+Singleton singletonInstance = Singleton.Instance;
+singletonInstance.SomeOperation();
+</div></code></pre>
+<p><strong>Example Image</strong>:</p>
+<h2 id="alt-textalt-text"><img src="image.png" alt="alt text">
+<img src="image-2.png" alt="alt text"></h2>
+<h3 id="2-factory-method-pattern">2. Factory Method Pattern</h3>
+<ul>
+<li>
+<p><strong>Purpose</strong>: The Factory Method Pattern provides an interface for creating objects in a superclass while allowing subclasses to modify the type of objects that will be created. This pattern promotes loose coupling by isolating the instantiation logic from the code that uses the objects.</p>
+</li>
+<li>
+<p><strong>Advantages</strong>:</p>
+<ul>
+<li>Enhances extensibility by allowing new product types to be added with minimal changes to existing code.</li>
+<li>Separates the creation logic from the product usage, which makes code maintenance easier.</li>
+<li>Supports varying levels of abstraction for creating different products.</li>
+</ul>
+</li>
+</ul>
+<p><strong>C# Example</strong>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span> 
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetProductName</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProductA</span> : <span class="hljs-title">Product</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetProductName</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"Product A"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProductB</span> : <span class="hljs-title">Product</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetProductName</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"Product B"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Creator</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> Product <span class="hljs-title">FactoryMethod</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteCreatorA</span> : <span class="hljs-title">Creator</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Product <span class="hljs-title">FactoryMethod</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-keyword">new</span> ConcreteProductA();
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteCreatorB</span> : <span class="hljs-title">Creator</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> Product <span class="hljs-title">FactoryMethod</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-keyword">new</span> ConcreteProductB();
+}
+
+<span class="hljs-comment">// Client code</span>
+Creator creator = <span class="hljs-keyword">new</span> ConcreteCreatorA();
+Product product = creator.FactoryMethod();
+Console.WriteLine(product.GetProductName()); <span class="hljs-comment">// Output: Product A</span>
+</div></code></pre>
+<p><em>Usage</em>: This setup allows new product types to be introduced without altering existing code. For instance, if a new <code>ConcreteProductC</code> is added, only the new creator needs to be implemented.</p>
+<p><strong>Example Image</strong>:</p>
+<p><img src="image-3.png" alt="alt text"></p>
+<hr>
+<h3 id="3-builder-pattern">3. Builder Pattern</h3>
+<ul>
+<li>
+<p><strong>Purpose</strong>: The Builder Pattern separates the construction of complex objects from their representation. This allows for the same construction process to create different representations, providing more control over the construction process, particularly when dealing with classes that have multiple parameters or states.</p>
+</li>
+<li>
+<p><strong>Context</strong>: This pattern is beneficial when:</p>
+<ul>
+<li>You have classes with constructors that take many parameters, making it difficult to manage and maintain.</li>
+<li>You need to construct complex objects step-by-step and may require different configurations based on specific scenarios.</li>
+</ul>
+</li>
+<li>
+<p><strong>Advantages</strong>:</p>
+<ul>
+<li>Flexibility in constructing complex objects as different configurations can be applied without changing the construction logic.</li>
+<li>Improves code readability and maintainability by separating the construction and representation logic.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Architecture</strong>:</p>
+<ul>
+<li><strong>Builder</strong>: An interface that defines the steps required to build the product.</li>
+<li><strong>ConcreteBuilder</strong>: Implements the Builder interface and provides specific implementations for constructing the parts of the product.</li>
+<li><strong>Product</strong>: Represents the complex object that is being built.</li>
+<li><strong>Director</strong>: A class that uses the Builder interface to control the construction process.</li>
+</ul>
+<p><strong>C# Example</strong>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Product</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> PartA { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> PartB { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">string</span> <span class="hljs-title">ToString</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">$"Product with <span class="hljs-subst">{PartA}</span> and <span class="hljs-subst">{PartB}</span>"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IBuilder</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BuildPartA</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BuildPartB</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function">Product <span class="hljs-title">GetResult</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteBuilder</span> : <span class="hljs-title">IBuilder</span>
+{
+    <span class="hljs-keyword">private</span> Product product = <span class="hljs-keyword">new</span> Product();
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPartA</span>(<span class="hljs-params"></span>)</span> =&gt; product.PartA = <span class="hljs-string">"Part A"</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">BuildPartB</span>(<span class="hljs-params"></span>)</span> =&gt; product.PartB = <span class="hljs-string">"Part B"</span>;
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Product <span class="hljs-title">GetResult</span>(<span class="hljs-params"></span>)</span> =&gt; product;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Director</span>
+{
+    <span class="hljs-keyword">private</span> IBuilder builder;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Director</span>(<span class="hljs-params">IBuilder builder</span>)</span>
+    {
+        <span class="hljs-keyword">this</span>.builder = builder;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Construct</span>(<span class="hljs-params"></span>)</span>
+    {
+        builder.BuildPartA();
+        builder.BuildPartB();
+    }
+}
+
+<span class="hljs-comment">// Client code</span>
+IBuilder builder = <span class="hljs-keyword">new</span> ConcreteBuilder();
+Director director = <span class="hljs-keyword">new</span> Director(builder);
+director.Construct();
+Product product = builder.GetResult();
+Console.WriteLine(product); <span class="hljs-comment">// Output: Product with Part A and Part B</span>
+</div></code></pre>
+<p><strong>Example Image</strong>:</p>
+<h2 id="alt-textalt-textalt-text"><img src="image-6.png" alt="alt text">
+<img src="image-4.png" alt="alt text">
+<img src="image-5.png" alt="alt text"></h2>
+<h3 id="4-abstract-factory-pattern">4. Abstract Factory Pattern</h3>
+<ul>
+<li><strong>Purpose</strong>: The Abstract Factory Pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes. This pattern is ideal when a system needs to be independent of how its objects are created, composed, and represented.</li>
+</ul>
+<p><strong>C# Example</strong>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IProductA</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">GetName</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IProductB</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">string</span> <span class="hljs-title">GetDescription</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProductA1</span> : <span class="hljs-title">IProductA</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetName</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"Concrete Product A1"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteProductB1</span> : <span class="hljs-title">IProductB</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetDescription</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-string">"Concrete Product B1 Description"</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IFactory</span>
+{
+    <span class="hljs-function">IProductA <span class="hljs-title">CreateProductA</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-function">IProductB <span class="hljs-title">CreateProductB</span>(<span class="hljs-params"></span>)</span>;
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcreteFactory1</span> : <span class="hljs-title">IFactory</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IProductA <span class="hljs-title">CreateProductA</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-keyword">new</span> ConcreteProductA1();
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IProductB <span class="hljs-title">CreateProductB</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-keyword">new</span> ConcreteProductB1();
+}
+
+<span class="hljs-comment">// Client code</span>
+IFactory factory = <span class="hljs-keyword">new</span> ConcreteFactory1();
+IProductA productA = factory.CreateProductA();
+IProductB productB = factory.CreateProductB();
+Console.WriteLine(productA.GetName()); <span class="hljs-comment">// Output: Concrete Product A1</span>
+Console.WriteLine(productB.GetDescription()); <span class="hljs-comment">// Output: Concrete Product B1 Description</span>
+</div></code></pre>
+<h3 id="5-prototype-pattern">5. Prototype Pattern</h3>
+<p><strong>Purpose</strong>: Enables creating new objects by copying an existing object (the prototype).</p>
+<p><strong>Advantages</strong>:</p>
+<ul>
+<li>Avoids subclassing and promotes dynamic object creation.</li>
+<li>Simplifies the creation of complex objects.</li>
+</ul>
+<p><strong>Disadvantages</strong>:</p>
+<ul>
+<li>Complexity in deciding between shallow and deep copies.</li>
+<li>May introduce additional complexity in implementation.</li>
+</ul>
+<p><strong>Example (C#)</strong>:</p>
+<h4 id="1-prototype-interface">1. Prototype Interface</h4>
+<pre class="hljs"><code><div><span class="hljs-comment">// Prototype Pattern</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IPrototype</span> 
+{ 
+    <span class="hljs-function">IPrototype <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span>; <span class="hljs-comment">// Method to clone the prototype</span>
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ConcretePrototype</span> : <span class="hljs-title">IPrototype</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name; <span class="hljs-comment">// Name property</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Age; <span class="hljs-comment">// Age property</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ConcretePrototype</span>(<span class="hljs-params">ConcretePrototype source</span>)</span> 
+    { 
+        Name = source.Name; 
+        Age = source.Age; 
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IPrototype <span class="hljs-title">Clone</span>(<span class="hljs-params"></span>)</span> =&gt; <span class="hljs-keyword">new</span> ConcretePrototype(<span class="hljs-keyword">this</span>); <span class="hljs-comment">// Clone method</span>
+}
+
+</div></code></pre>
+<p><strong>Usage Scenarios</strong>:</p>
+<ul>
+<li>Creating objects that are expensive to instantiate.</li>
+<li>When flexibility in object creation is required.</li>
+<li>When the specific classes to be created are not known in advance.
+<img src="image-7.png" alt="alt text"></li>
+</ul>
+<hr>
+<h3 id="benefits-of-design-patterns">Benefits of Design Patterns</h3>
+<ul>
+<li>Avoids reinventing solutions and documents design decisions.</li>
+<li>Provides a common vocabulary for developers.</li>
+<li>Encourages reusable and maintainable code.</li>
+</ul>
+<hr>
+<h2 id="comparison-table-of-creational-patterns">Comparison Table of Creational Patterns</h2>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Purpose</th>
+<th>Advantages</th>
+<th>Disadvantages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Singleton</strong></td>
+<td>Ensures a class has only one instance</td>
+<td>Controlled access, simplified architecture</td>
+<td>Difficult unit testing, limits parallelism</td>
+</tr>
+<tr>
+<td><strong>Factory Method</strong></td>
+<td>Creates objects without specifying the class type</td>
+<td>Enhances extensibility, separates product creation</td>
+<td>May lead to complex hierarchies</td>
+</tr>
+<tr>
+<td><strong>Builder</strong></td>
+<td>Step-by-step construction of complex objects</td>
+<td>Flexibility, allows different representations</td>
+<td>More complex implementation</td>
+</tr>
+<tr>
+<td><strong>Abstract Factory</strong></td>
+<td>Creates families of related objects</td>
+<td>Encapsulates object creation</td>
+<td>Can be complex to implement</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="design-patterns-usage-on-software-development-lifecycle">Design Patterns Usage on Software Development Lifecycle</h3>
+<p><img src="image-8.png" alt="alt text"></p>
+<h2 id="benefits-of-design-patterns">Benefits of Design Patterns</h2>
+<ul>
+<li><strong>Avoids Reinventing the Wheel</strong>: Using established patterns prevents the need to come up with new solutions for common problems.</li>
+<li><strong>Documentation of Trade-offs</strong>: Patterns allow developers to discuss design decisions in a structured way.</li>
+<li><strong>Common Vocabulary</strong>: A shared understanding of patterns fosters clearer communication within teams.</li>
+<li><strong>Pattern Catalogues</strong>: Organizations can build collections of patterns that reflect their specific needs and practices.</li>
+</ul>
+<h3 id="pattern-specifications">Pattern Specifications</h3>
+<ul>
+<li><strong>Elements of Patterns</strong>:
+<ul>
+<li><strong>Name and Type</strong>: Identifies the pattern.</li>
+<li><strong>Design Problem</strong>: The specific problem the pattern addresses.</li>
+<li><strong>Participants</strong>: Roles, classes, and their responsibilities.</li>
+<li><strong>Benefits and Liabilities</strong>: Advantages and potential drawbacks.</li>
+<li><strong>Guidelines</strong>: Usage tips for effective application.</li>
+<li><strong>Related Patterns</strong>: Connections to other patterns.</li>
+</ul>
+</li>
+<li><strong>Uses</strong>: Specifies general or specific application areas.</li>
+</ul>
+<hr>
+<h3 id="grasp-and-gof">GRASP and GoF</h3>
+<ul>
+<li><strong>GRASP (General Responsibility Assignment Software Patterns)</strong>:
+<ul>
+<li>Principles that guide assignment of responsibilities, universally applicable.</li>
+</ul>
+</li>
+<li><strong>GoF (Gang of Four) Patterns</strong>:
+<ul>
+<li>Standard solutions to common problems within specific contexts, not limited to one domain.</li>
+</ul>
+</li>
+</ul>
+<h2 id="note">Note</h2>
+<ul>
+<li>Design patterns are not merely shortcuts; they are carefully structured approaches to solving design problems. They facilitate maintainable and flexible code while improving collaboration and understanding among developers.</li>
+</ul>
+<h2 id="written-by-the-glory-kaka">Written by the Glory KAKA</h2>
+
+</body>
+</html>
